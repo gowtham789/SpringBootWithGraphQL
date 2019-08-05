@@ -1,0 +1,88 @@
+
+schema {
+ query: Query
+}
+
+type Query {
+	postById(id: ID): PostAndComments
+	commentsByPostId(id: ID): [Comment]
+	
+	productDetailsById(id: ID): ProductDetails
+	productInventoryDetails(id: ID): ProductInventoryDetails
+	productPriceDetails(id: ID): ProductPriceDetails
+}
+
+type Product{
+	id: String
+	productName: String!
+	colour: String!
+	size: String!
+	capacity: String!
+	battery: String!
+	isAppleCertified: Boolean!
+	warrentyPeriod: Int!
+	tags: String!
+	description: String!
+}
+
+type ProductDetails{
+ 	id: ID!
+	product : Product
+
+	# Inventory
+	productInventory: ProductInventory!
+
+	#Price
+	productPrice: ProductPrice!
+}
+
+type ProductInventoryDetails{
+ 	id: ID!
+	product : Product
+
+	# Inventory
+	productInventory: ProductInventory!
+
+}
+
+type ProductPriceDetails{
+ 	id: ID!
+	product : Product
+	
+	#Price
+	productPrice: ProductPrice!
+
+}
+
+type ProductPrice{
+	productId: String!
+	value: String!
+	currency: String!
+
+}
+
+type ProductInventory{
+	productID: String!
+	inventory: Int!
+}
+
+
+type PostAndComments {
+	id: ID!
+	title: String!
+	body: String!
+	userId: ID!
+	comments: [Comment]
+}
+
+type Comment{
+	postId: ID!
+	id: ID!
+	name: String!
+	email: String!
+	body: String!
+}
+
+
+
+
