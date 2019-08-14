@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.demo.graphql.exceptions.ProductInventoryNotFoundException;
 import com.demo.graphql.exceptions.ProductNotFoundException;
 import com.demo.graphql.exceptions.ProductPriceNotFoundException;
+import com.demo.graphql.filters.ProductType;
+import com.demo.graphql.filters.WhereClause;
 import com.demo.model.Comment;
 import com.demo.model.Post;
 import com.demo.model.PostAndComments;
@@ -191,8 +193,11 @@ public class DemoService {
 
 	public Object getProductsFilter(DataFetchingEnvironment dataFetchingEnvironment) {
 
-		String params = dataFetchingEnvironment.getArgument("where");
-		System.out.println("filter params " + params);
+		WhereClause ds = dataFetchingEnvironment.getArgument("where");
+		
+		ProductType pt = ds.getProduct();
+		
+		System.out.println(pt);
 		return null;
 	}
 }
