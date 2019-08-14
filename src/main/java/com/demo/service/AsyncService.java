@@ -76,5 +76,14 @@ public class AsyncService {
 		ProductPrice product = responseBody.getBody();
 		return new AsyncResult<ProductPrice>(product);
 	}
+	
+	@Async
+	public Future<List<Product>> getProducts(String url) {
+		logger.info("Reqest received to get Post:: URL: [{}]", url);		
+		ResponseEntity<List<Product>> responseBody = restTemplate.exchange(url, HttpMethod.GET, null,new ParameterizedTypeReference<List<Product>>() {
+		});
+		List<Product> product = responseBody.getBody();
+		return new AsyncResult<List<Product>>(product);
+	}
 
 }

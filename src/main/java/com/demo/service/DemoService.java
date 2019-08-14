@@ -27,6 +27,9 @@ import graphql.schema.DataFetchingEnvironment;
 @Service
 public class DemoService {
 
+	@Value(value = "${allProduct.base.url}")
+	private String allProductsUrl;
+	
 	@Value(value = "${product.base.url}")
 	private String productBaseUrl;
 
@@ -67,6 +70,8 @@ public class DemoService {
 
 	public List<Comment> getComments(DataFetchingEnvironment dataFetchingEnvironment)
 			throws InterruptedException, ExecutionException {
+		
+		
 		logger.info("Request received to get all Comments");
 		logger.info("dataFetchingEnvironment:Id:[{}]", dataFetchingEnvironment.getArgument("id").toString());
 
@@ -132,7 +137,6 @@ public class DemoService {
 			throws InterruptedException, ExecutionException {
 		
 		String params = dataFetchingEnvironment.getArgument("id");
-
 		Future<Product> product = asyncService.getProduct(productBaseUrl,params);
 		if(product.get()==null) {
 			throw new ProductNotFoundException(params);
@@ -177,5 +181,18 @@ public class DemoService {
 		productDetails.setProduct(product.get());
 		productDetails.setProductPrice(productPrice.get());
 		return productDetails;
+	}
+
+	public List<Product> getAllProducts(DataFetchingEnvironment dataFetchingEnvironment) throws InterruptedException, ExecutionException {
+		
+		Future<List<Product>> product = asyncService.getProducts(allProductsUrl);
+		return  product.get();
+	}
+
+	public Object getProductsFilter(DataFetchingEnvironment dataFetchingEnvironment) {
+
+		String params = dataFetchingEnvironment.getArgument("where");
+		System.out.println("filter params " + params);
+		return null;
 	}
 }

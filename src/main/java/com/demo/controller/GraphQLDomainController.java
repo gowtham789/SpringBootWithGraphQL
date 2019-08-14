@@ -1,10 +1,12 @@
 package com.demo.controller;
 
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,8 @@ public class GraphQLDomainController {
 	public ResponseEntity<Object> getPost(@RequestBody String query) {
 		logger.info("Request received to execute Query:[{}]", query);
 		ExecutionResult execute = graphQLProvider.graphQL().execute(query);
+		//Map<String, Object> specification = execute.toSpecification();
+		//System.out.println("specification" +specification.toString() );
 		return new ResponseEntity<>(execute, HttpStatus.OK);
 	}
 }

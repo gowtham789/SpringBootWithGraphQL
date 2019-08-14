@@ -1,5 +1,7 @@
 package com.demo.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,11 @@ public class DomainController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@RequestMapping("/allProductService")
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
+	}
 
 	@RequestMapping("/productService/{id}")
 	public Product getProductDetails(@PathVariable String id) {

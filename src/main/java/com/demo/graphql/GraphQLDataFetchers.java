@@ -115,6 +115,25 @@ public class GraphQLDataFetchers {
 			return null;
 		};
 	}
+
+	public DataFetcher getAllProducts() {
+		return dataFetchingEnvironment -> {
+			try {
+				return demoService.getAllProducts(dataFetchingEnvironment);
+			} catch (InterruptedException | ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		};
+	}
+
+	public DataFetcher getProductsFilter() {
+		// TODO Auto-generated method stub
+		return dataFetchingEnvironment -> {
+			return demoService.getProductsFilter(dataFetchingEnvironment);
+		};
+	}
 	
 	
 

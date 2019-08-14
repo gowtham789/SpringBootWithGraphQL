@@ -53,11 +53,11 @@ public class GraphQLProvider {
 		return RuntimeWiring.newRuntimeWiring()
 				.type(newTypeWiring("Query").dataFetcher("postById", graphQLDataFetchers.getPostDataFetcher()))
 				.type(newTypeWiring("Query").dataFetcher("commentsByPostId", graphQLDataFetchers.getCommentDataFetcher()))
-				
+				.type(newTypeWiring("Query").dataFetcher("getAllProducts", graphQLDataFetchers.getAllProducts()))
 				.type(newTypeWiring("Query").dataFetcher("productDetailsById", graphQLDataFetchers.getProductDetailsDataFetcher()))
 				.type(newTypeWiring("Query").dataFetcher("productInventoryDetails", graphQLDataFetchers.getProductInventoryDetails()))
 				.type(newTypeWiring("Query").dataFetcher("productPriceDetails", graphQLDataFetchers.getProductPriceDetails()))
-				
+				.type(newTypeWiring("Query").dataFetcher("products", graphQLDataFetchers.getProductsFilter()))
 				.build();
 	}
 
